@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heatpricing
+  namespace: "proj-gr4"
+  labels:
+    app: heatpricing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heatpricing
+  template:
+    metadata:
+      labels:
+        app: heatpricing
+    spec:
+      containers:
+      - name: heatpricing
+        image: 201608930/heatpricing:latest
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: heatpricing
+  namespace: "proj-gr4"
+spec:
+  selector:
+    app: heatpricing
+  ports:
+    - port: 8080
+      targetPort: 80
+    
+      
+      
